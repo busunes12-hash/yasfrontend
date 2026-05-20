@@ -84,7 +84,7 @@ export default function Footer() {
         {/* Mobile: horizontal titles, vertical links */}
         <div className="lg:hidden">
           {/* Horizontal scrollable titles */}
-          <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
+          <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide justify-center">
             <button
               onClick={() => toggleSection('shop')}
               className="flex-shrink-0 text-[11px] uppercase tracking-[0.32em] text-primary font-semibold py-2 border-b-2 transition-colors duration-300 whitespace-nowrap"
@@ -112,13 +112,13 @@ export default function Footer() {
           </div>
 
           {/* Shop links */}
-          <div className={`overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide ${openSections.shop ? 'block' : 'hidden'}`}>
-            <ul className="flex flex-col gap-3 min-w-max">
+          <div className={`overflow-x-auto pb-6 -mx-4 px-4 scrollbar-hide flex justify-center ${openSections.shop ? 'block' : 'hidden'}`}>
+            <ul className="flex flex-col gap-3 min-w-max items-center">
               {shopLinks.map((link) => (
                 <li key={link.id}>
                   <button
                     onClick={() => handleFooterLinkClick(`/shop?collection=${link.slug}`)}
-                    className="text-sm text-textSecondary hover:text-primary transition-colors duration-300 text-left bg-none border-none p-0 cursor-pointer"
+                    className="text-sm text-textSecondary hover:text-primary transition-colors duration-300 text-center bg-none border-none p-0 cursor-pointer"
                   >
                     {lang === 'ar' ? link.nameAr : link.nameEn}
                   </button>
@@ -128,13 +128,13 @@ export default function Footer() {
           </div>
 
           {/* Company links */}
-          <div className={`overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide ${openSections.company ? 'block' : 'hidden'}`}>
-            <ul className="flex flex-col gap-3 min-w-max">
+          <div className={`overflow-x-auto pb-6 -mx-4 px-4 scrollbar-hide flex justify-center ${openSections.company ? 'block' : 'hidden'}`}>
+            <ul className="flex flex-col gap-3 min-w-max items-center">
               {companyLinks.map((link) => (
                 <li key={link.id}>
                   <button
                     onClick={() => handleFooterLinkClick(link.to)}
-                    className="text-sm text-textSecondary hover:text-primary transition-colors duration-300 text-left bg-none border-none p-0 cursor-pointer"
+                    className="text-sm text-textSecondary hover:text-primary transition-colors duration-300 text-center bg-none border-none p-0 cursor-pointer"
                   >
                     {lang === 'ar' ? link.nameAr : link.nameEn}
                   </button>
@@ -144,13 +144,13 @@ export default function Footer() {
           </div>
 
           {/* Policies links */}
-          <div className={`overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide ${openSections.policies ? 'block' : 'hidden'}`}>
-            <ul className="flex flex-col gap-3 min-w-max">
+          <div className={`overflow-x-auto pb-6 -mx-4 px-4 scrollbar-hide flex justify-center ${openSections.policies ? 'block' : 'hidden'}`}>
+            <ul className="flex flex-col gap-3 min-w-max items-center">
               {policiesLinks.map((link) => (
                 <li key={link.id}>
                   <button
                     onClick={() => handleFooterLinkClick(link.to)}
-                    className="text-sm text-textSecondary hover:text-primary transition-colors duration-300 text-left bg-none border-none p-0 cursor-pointer"
+                    className="text-sm text-textSecondary hover:text-primary transition-colors duration-300 text-center bg-none border-none p-0 cursor-pointer"
                   >
                     {lang === 'ar' ? link.nameAr : link.nameEn}
                   </button>
@@ -161,7 +161,7 @@ export default function Footer() {
         </div>
 
         {/* Desktop: vertical layout */}
-        <div className="hidden lg:grid lg:gap-14 lg:grid-cols-2 lg:grid-cols-5">
+        <div className="hidden lg:grid lg:gap-14 lg:grid-cols-2 lg:grid-cols-5 items-start">
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
@@ -258,17 +258,12 @@ export default function Footer() {
         <span className="dot" />
       </div>
 
-      {/* Drop calendar */}
-      <p className="text-center text-[11px] uppercase tracking-[0.32em] text-primary font-semibold mb-8">
-        {t('footer.dropCalendar')}
-      </p>
-
       {/* Bottom bar */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
-        <p className="text-xs text-textTertiary tracking-wide">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-5 py-6 border-t border-border/30">
+        <p className="text-xs text-textTertiary tracking-wide text-center md:text-start">
           © {year} Yas Beads · {t('footer.rights')}
         </p>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center justify-center gap-2">
           <span className="text-[10px] text-textTertiary tracking-[0.18em] uppercase me-1">{t('footer.payments')}</span>
           <PaymentBadge>VISA</PaymentBadge>
           <PaymentBadge>MASTER</PaymentBadge>

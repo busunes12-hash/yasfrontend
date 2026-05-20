@@ -146,7 +146,7 @@ export default function ProductDetail() {
       <div className="bg-background">
         <div className="container-page section-padding">
           {/* Breadcrumbs */}
-          <nav className="text-sm text-textSecondary mb-6 flex gap-2 flex-wrap" aria-label="Breadcrumb">
+          <nav className="text-sm text-textSecondary mb-6 mt-4 flex gap-2 flex-wrap" aria-label="Breadcrumb">
             <Link to="/" className="hover:text-primary">{t('nav.home')}</Link>
             <span aria-hidden="true">/</span>
             <Link to="/shop" className="hover:text-primary">{t('nav.shop')}</Link>
