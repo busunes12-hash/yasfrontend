@@ -17,7 +17,7 @@ export default function Layout() {
   }, [location.pathname]);
 
   return (
-    <div className="flex flex-col min-h-screen overflow-x-hidden">
+    <div className="flex flex-col min-h-screen overflow-x-clip">
       {/* Accessibility: skip to main content */}
       <a
         href="#main-content"
