@@ -18,7 +18,16 @@ import SEO from '../components/seo/SEO';
 import { useProductJsonLd } from '../components/seo/useProductJsonLd';
 import { cn } from '../utils/cn';
 
-const WA_NUMBER = '971000000000';
+// New PDP sections
+import PDPHighlights from '../components/sections/pdp/PDPHighlights';
+import PDPShipping from '../components/sections/pdp/PDPShipping';
+import PDPCompareTable from '../components/sections/pdp/PDPCompareTable';
+import PDPProcess from '../components/sections/pdp/PDPProcess';
+import PDPGuarantee from '../components/sections/pdp/PDPGuarantee';
+import PDPFAQ from '../components/sections/pdp/PDPFAQ';
+import PDPFinalCTA from '../components/sections/pdp/PDPFinalCTA';
+
+const WA_NUMBER = '971553779772';
 
 const IconWhatsapp = (props) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -392,6 +401,28 @@ export default function ProductDetail() {
             <ReviewsSection productSlug={product.slug} />
           </div>
         </div>
+
+        {/* ── NEW PDP SECTIONS ── */}
+        {/* Highlights (why this piece) */}
+        <PDPHighlights />
+
+        {/* Shipping & trust */}
+        <PDPShipping />
+
+        {/* Why us vs them comparison */}
+        <PDPCompareTable />
+
+        {/* How it's made */}
+        <PDPProcess />
+
+        {/* Guarantee */}
+        <PDPGuarantee />
+
+        {/* FAQ */}
+        <PDPFAQ productName={name} />
+
+        {/* Final CTA */}
+        <PDPFinalCTA product={product} onAdd={handleAddToCart} onNotify={() => setNotifyOpen(true)} />
       </div>
 
       {/* Related products */}
