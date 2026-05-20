@@ -97,7 +97,7 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 transition-colors duration-300 overflow-hidden',
+        'transition-all duration-300 overflow-hidden',
         scrolled
           ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-[0_4px_24px_rgba(0,0,0,0.4)]'
           : 'bg-background/80 border-b border-transparent'

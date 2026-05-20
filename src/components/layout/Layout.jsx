@@ -26,8 +26,17 @@ export default function Layout() {
         {lang === 'ar' ? 'انتقل إلى المحتوى الرئيسي' : 'Skip to main content'}
       </a>
 
-      <AnnouncementBar />
-      <Navbar />
+      {/* Fixed header wrapper - announcement bar + navbar */}
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <AnnouncementBar />
+        <Navbar />
+      </div>
+
+      {/*
+        Spacer to prevent content overlap with fixed header.
+        Height matches: announcement bar (~44px) + navbar (h-16 mobile / h-20 desktop)
+      */}
+      <div aria-hidden="true" className="h-[108px] md:h-[124px]" />
 
       {/*
         Page-transition AnimatePresence removed on purpose:
