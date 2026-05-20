@@ -31,8 +31,8 @@ export default function Home() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Yas Beads',
-    url: 'https://yasbeads.com',
-    logo: 'https://yasbeads.com/favicon.svg',
+    url: 'https://onssy.online',
+    logo: 'https://onssy.online/favicon.svg',
     sameAs: ['https://instagram.com/yasbead'],
     contactPoint: {
       '@type': 'ContactPoint',

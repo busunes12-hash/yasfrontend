@@ -5,7 +5,7 @@
 export function useProductJsonLd(product, lang = 'ar') {
   if (!product) return null;
 
-  const siteUrl = 'https://yasbeads.com';
+  const siteUrl = 'https://onssy.online';
 
   return {
     '@context': 'https://schema.org',

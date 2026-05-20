@@ -17,7 +17,7 @@ export default function SEO({
   noIndex = false,
 }) {
   const siteName = 'Yas Beads | ياس بيدز';
-  const siteUrl = 'https://yasbeads.com';
+  const siteUrl = 'https://onssy.online';
   const defaultImage = `${siteUrl}/og-image.jpg`;
   const defaultDescEn =
     'Yas Beads — the Emirati atelier for heirloom prayer beads. Hand-finished in Abu Dhabi from rare oud, Baltic amber, Negin saffron and precious stone. Numbered editions of fewer than fifty. Complimentary GCC delivery.';
