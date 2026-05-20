@@ -6,8 +6,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies (use install instead of ci for flexibility)
-RUN npm install --only=production && npm cache clean --force
+# Install all dependencies (including dev dependencies for building)
+RUN npm install && npm cache clean --force
 
 # Copy source code
 COPY . .
@@ -23,8 +23,7 @@ ENV VITE_META_PIXEL_ID=${VITE_META_PIXEL_ID}
 ENV VITE_WA_NUMBER=${VITE_WA_NUMBER}
 ENV VITE_API_URL=${VITE_API_URL}
 
-# Build with verbose output
-RUN npm run build || { echo "Build failed"; exit 1; }
+RUN npm run build
 
 # Production stage
 FROM nginx:alpine
