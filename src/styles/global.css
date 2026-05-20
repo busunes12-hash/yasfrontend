@@ -1,0 +1,472 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ════════════════════════════════════════════════════════════
+   YAS BEADS — Sanctuary Theme
+   Two-font system: Cormorant Garamond (display) + Inter (body).
+   Strict typographic scale, generous whitespace, premium calm.
+   ════════════════════════════════════════════════════════════ */
+
+@layer base {
+  :root {
+    /* Brand gold - warmer, richer tone */
+    --color-primary: #d4b483;
+    --color-primary-dark: #b59466;
+    --color-primary-light: #e8d6a8;
+    --color-accent: #f2e0b8;
+
+    /* Dark surfaces - more refined depth */
+    --color-bg: #0b0f0f;
+    --color-surface: #161d1d;
+    --color-surface-alt: #1f2626;
+    --color-ink: #070a0a;
+    --color-deep: var(--color-ink);
+
+    /* Light surfaces */
+    --color-ivory: #f7f0e3;
+    --color-ivory-alt: #ede6d5;
+
+    /* Borders - refined for better contrast */
+    --color-border: #252c2c;
+    --color-border-strong: #353c3c;
+
+    /* Text - improved hierarchy */
+    --color-text:   #f5efe2;
+    --color-text-2: #b0a89d;
+    --color-text-3: #9a9488;
+
+    /* Feedback */
+    --color-success: #7ba889;
+    --color-badge:   #c26b5f;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+    /* Prevent horizontal scroll at document level */
+    overflow-x: hidden;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-background text-textPrimary font-sans antialiased;
+    font-size: 16px;
+    line-height: 1.75;
+    font-feature-settings: 'kern', 'liga', 'calt', 'ss01';
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Solid background — the warm "sanctuary" tone is layered as a single
+       fixed pseudo-element below, which the GPU can composite once instead
+       of repainting on every scroll frame. */
+    background-color: #0b0f0f;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* Ambient gradient as an isolated, fixed compositor layer.
+     Single paint, cached on the GPU, no scroll cost. */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(212, 180, 131, 0.08), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 15% 70%, rgba(212, 180, 131, 0.04), transparent 60%),
+      radial-gradient(ellipse 90% 60% at 50% 100%, rgba(181, 148, 102, 0.05), transparent 65%);
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  html[dir='rtl'] body {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+    line-height: 1.9;
+  }
+  html[dir='ltr'] body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* ── Headings: editorial weight, tight leading ── */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif text-textPrimary;
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-feature-settings: 'kern', 'liga', 'dlig', 'ss01';
+  }
+  h1 { font-weight: 500; letter-spacing: -0.025em; }
+  h2 { font-weight: 500; letter-spacing: -0.02em; }
+  h3 { font-weight: 500; letter-spacing: -0.01em; }
+  h4, h5, h6 { font-weight: 600; }
+
+  html[dir='rtl'] h1,
+  html[dir='rtl'] h2,
+  html[dir='rtl'] h3,
+  html[dir='rtl'] h4,
+  html[dir='rtl'] h5,
+  html[dir='rtl'] h6 {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.4;
+  }
+
+  p {
+    line-height: 1.75;
+  }
+
+  ::selection {
+    background: rgba(201, 169, 97, 0.3);
+    color: var(--color-text);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  button {
+    @apply transition-all duration-300;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border-radius: 8px;
+    border: 2px solid var(--color-bg);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary-dark);
+  }
+
+  img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  /* ── Honor reduced-motion at the source ──
+     Cancels long transitions and infinite keyframes for users
+     who opted out at the OS level. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   Utilities
+   ════════════════════════════════════════════════════════════ */
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty  { text-wrap: pretty; }
+
+  /* ── Cheap "render only when near viewport" utility ──
+     Lets the browser skip layout, paint, and rendering for off-screen
+     sections. Massive scroll perf win on long pages. */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 800px;
+  }
+  .cv-card {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 480px;
+  }
+
+  .shimmer-bg {
+    background-image: linear-gradient(
+      105deg,
+      rgba(226, 197, 138, 0) 30%,
+      rgba(226, 197, 138, 0.10) 50%,
+      rgba(226, 197, 138, 0) 70%
+    );
+    background-size: 1000px 100%;
+    background-repeat: no-repeat;
+  }
+
+  .grain-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    opacity: 0.6;
+  }
+
+  /* Eyebrow — uppercase gold label, used everywhere as a wayfinding device */
+  .eyebrow {
+    @apply inline-block text-eyebrow uppercase font-semibold text-primary;
+  }
+
+  .hairline { @apply h-px bg-border; }
+  .hairline-gold {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 180, 131, 0.5), transparent);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* ── Container: more breath on large screens ── */
+  .container-page {
+    @apply mx-auto w-full max-w-page px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16;
+  }
+
+  /* ── Section padding scale (use these, not raw py-* values) ──
+     .section-padding         standard section
+     .section-padding-lg      editorial / hero / brand-defining
+   */
+  .section-padding {
+    @apply py-24 md:py-32;
+  }
+  .section-padding-lg {
+    @apply py-32 md:py-40 lg:py-48;
+  }
+
+  /* ── Section header — title + subtitle block ── */
+  .section-header {
+    @apply mb-16 md:mb-24;
+  }
+
+  /* ── Section background variants ──
+     Sections are transparent by default to let the body's ambient
+     gradient flow through. Use these utilities for rhythm.
+   */
+  .section-bg-soft {
+    /* Subtle tonal lift, used to gently distinguish a band */
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(22, 29, 29, 0.55) 12%, rgba(22, 29, 29, 0.55) 88%, transparent 100%);
+  }
+  .section-bg-panel {
+    /* Stronger, anchored panel — for feature / brand-defining sections */
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(10, 14, 14, 0.85) 8%, rgba(10, 14, 14, 0.92) 50%, rgba(10, 14, 14, 0.85) 92%, transparent 100%);
+  }
+
+  /* ── Top / bottom hairline accents for section transitions ── */
+  .section-edge-top::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 180, 131, 0.28), transparent);
+    pointer-events: none;
+  }
+  .section-edge-bottom::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 180, 131, 0.18), transparent);
+    pointer-events: none;
+  }
+
+  .glow-gold {
+    box-shadow:
+      0 0 0 1px rgba(212, 180, 131, 0.22),
+      0 20px 60px -20px rgba(212, 180, 131, 0.3),
+      0 0 0 1px rgba(212, 180, 131, 0.1) inset;
+  }
+
+  .ltr-numerals {
+    direction: ltr;
+    unicode-bidi: embed;
+    display: inline-block;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   Components
+   ════════════════════════════════════════════════════════════ */
+@layer components {
+  /* ── Buttons ─────────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-medium transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed;
+    letter-spacing: 0.06em;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-deepBrown hover:bg-primary-light;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      0 4px 12px rgba(0, 0, 0, 0.3),
+      0 12px 32px rgba(212, 180, 131, 0.2);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-primary:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 0 0 1px rgba(242, 224, 184, 0.4),
+      0 16px 48px rgba(212, 180, 131, 0.25);
+    transform: translateY(-2px);
+  }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-ghost {
+    @apply btn border border-primary/50 text-primary bg-transparent;
+    background-image: linear-gradient(135deg, rgba(212, 180, 131, 0.06), transparent 50%);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-ghost:hover {
+    @apply border-primary text-deepBrown bg-primary;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      0 12px 32px rgba(212, 180, 131, 0.25);
+    transform: translateY(-1px);
+  }
+
+  .btn-dark {
+    @apply btn bg-deepBrown text-textPrimary border border-border;
+  }
+  .btn-dark:hover {
+    @apply bg-surface;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  /* ── Tertiary text link with arrow (used for "View All", "Discover", etc.) ── */
+  .link-cta {
+    @apply inline-flex items-center gap-2 text-primary hover:text-primary-light transition-colors duration-500;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    position: relative;
+  }
+  .link-cta::after {
+    content: '→';
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0.8;
+  }
+  .link-cta:hover::after {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+  html[dir='rtl'] .link-cta::after {
+    content: '←';
+  }
+  html[dir='rtl'] .link-cta:hover::after {
+    transform: translateX(-4px);
+  }
+
+  /* ── Inputs ─────────────────────────────────────────── */
+  .input-field {
+    @apply w-full rounded-xl border border-border bg-surface/80 px-5 py-3.5 text-textPrimary placeholder:text-textTertiary transition-all duration-300;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  .input-field:focus {
+    @apply border-primary outline-none bg-surface;
+    box-shadow:
+      0 0 0 4px rgba(212, 180, 131, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 8px 24px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+  }
+  .input-field:hover:not(:focus) {
+    @apply border-borderStrong;
+  }
+
+  /* ── Card surface ───────────────────────────────────── */
+  .card-surface {
+    @apply bg-surface border border-border rounded-2xl;
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 60%);
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.04) inset,
+      0 8px 28px -12px rgba(0, 0, 0, 0.55),
+      0 0 0 1px rgba(212, 180, 131, 0.05) inset;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .card-surface:hover {
+    border-color: rgba(212, 180, 131, 0.40);
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
+      0 18px 56px -18px rgba(0, 0, 0, 0.65),
+      0 0 0 1px rgba(212, 180, 131, 0.18) inset,
+      0 0 36px -8px rgba(212, 180, 131, 0.18);
+    transform: translateY(-3px);
+  }
+
+  /* ── Premium media frame — used for hero / collection / story imagery ── */
+  .media-frame {
+    @apply relative overflow-hidden rounded-2xl bg-deepBrown;
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.05) inset,
+      0 28px 80px -24px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(212, 180, 131, 0.10);
+  }
+  .media-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      inset 0 0 0 1px rgba(212, 180, 131, 0.08);
+  }
+
+  /* ── Section divider ornament ───────────────────────── */
+  .ornament-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .ornament-divider::before,
+  .ornament-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 180, 131, 0.4), transparent);
+    max-width: 160px;
+  }
+  .ornament-divider .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--color-primary);
+    box-shadow: 0 0 12px rgba(212, 180, 131, 0.5);
+  }
+
+  /* ── Feature panel — anchored sections (story, newsletter) ── */
+  .feature-panel {
+    position: relative;
+    isolation: isolate;
+  }
+  .feature-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 0%, rgba(212, 180, 131, 0.10), transparent 60%),
+      linear-gradient(180deg, rgba(10, 14, 14, 0.55) 0%, rgba(10, 14, 14, 0.85) 50%, rgba(10, 14, 14, 0.55) 100%);
+    z-index: -1;
+    pointer-events: none;
+  }
+}

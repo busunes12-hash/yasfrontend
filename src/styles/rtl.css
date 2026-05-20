@@ -1,0 +1,31 @@
+/* ---------- RTL-specific overrides ---------- */
+
+/* Mirror chevrons / arrows when rtl */
+html[dir='rtl'] .rtl-flip {
+  transform: scaleX(-1);
+}
+
+/* Numbers rendered LTR even within Arabic blocks */
+.ltr-numerals {
+  direction: ltr;
+  unicode-bidi: embed;
+  display: inline-block;
+}
+
+/* Override certain start/end utilities where needed */
+html[dir='rtl'] .rtl\:text-right {
+  text-align: right;
+}
+html[dir='ltr'] .ltr\:text-left {
+  text-align: left;
+}
+
+/* Drawer slides from the appropriate side */
+html[dir='rtl'] .drawer-from-end {
+  right: auto;
+  left: 0;
+}
+html[dir='ltr'] .drawer-from-end {
+  left: auto;
+  right: 0;
+}

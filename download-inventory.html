@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Inventory CSV</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #0a0e0e 0%, #1a2222 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    h1 {
+      color: #0a0e0e;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    .stat-card {
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 32px;
+      font-weight: bold;
+      color: #0a0e0e;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 5px;
+    }
+    .stat-card.valid .stat-value { color: #10b981; }
+    .stat-card.warning .stat-value { color: #f59e0b; }
+    .stat-card.danger .stat-value { color: #ef4444; }
+    .download-btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #c9a961 0%, #e2c58a 100%);
+      color: #0a0e0e;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(201, 169, 97, 0.4);
+    }
+    .download-btn:active {
+      transform: translateY(0);
+    }
+    .info {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f0f9ff;
+      border-radius: 8px;
+      border-left: 4px solid #3b82f6;
+    }
+    .info h3 {
+      font-size: 14px;
+      color: #0a0e0e;
+      margin-bottom: 8px;
+    }
+    .info p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+    }
+    .info ul {
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+    .info li {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Inventory Export</h1>
+    <p class="subtitle">Download your complete product catalog and inventory</p>
+    
+    <div class="stats">
+      <div class="stat-card valid">
+        <div class="stat-value" id="totalProducts">15</div>
+        <div class="stat-label">Total Products</div>
+      </div>
+      <div class="stat-card valid">
+        <div class="stat-value" id="validProducts">15</div>
+        <div class="stat-label">Valid Products</div>
+      </div>
+      <div class="stat-card valid">
+        <div class="stat-value" id="collectionsCount">6</div>
+        <div class="stat-label">Collections</div>
+      </div>
+    </div>
+    
+    <a href="inventory-export.csv" download class="download-btn">
+      📥 Download CSV File
+    </a>
+    
+    <div class="info">
+      <h3>📊 CSV Contents</h3>
+      <p>The exported CSV includes:</p>
+      <ul>
+        <li>Product Name (English)</li>
+        <li>Collection Name</li>
+        <li>Product Price (AED)</li>
+        <li>Product URL</li>
+        <li>SKU / Product Number</li>
+        <li>Inventory Quantity</li>
+      </ul>
+    </div>
+    
+    <div class="info" style="margin-top: 15px; background: #fff7ed; border-left-color: #f97316;">
+      <h3>🔍 Data Validation</h3>
+      <p>All products have been validated for:</p>
+      <ul>
+        <li>Complete product names</li>
+        <li>Valid collection assignments</li>
+        <li>Accurate pricing</li>
+        <li>Valid product URLs</li>
+        <li>Current inventory quantities</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Update stats dynamically
+    document.addEventListener('DOMContentLoaded', function() {
+      const stats = {
+        totalProducts: 15,
+        validProducts: 15,
+        collectionsCount: 6
+      };
+      
+      document.getElementById('totalProducts').textContent = stats.totalProducts;
+      document.getElementById('validProducts').textContent = stats.validProducts;
+      document.getElementById('collectionsCount').textContent = stats.collectionsCount;
+    });
+  </script>
+</body>
+</html>
